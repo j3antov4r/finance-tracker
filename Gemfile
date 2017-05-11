@@ -40,6 +40,8 @@ gem 'devise'
 gem 'twitter-bootstrap-rails'
 
 gem 'devise-bootstrap-views'
+#Gema para ver los Stock Quotes
+gem 'stock_quote'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
