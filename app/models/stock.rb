@@ -1,5 +1,7 @@
 class Stock < ApplicationRecord
 
+  has_many :user_stocks
+  has_many :users, through: :user_stocks
 	##metodos de clase
 
 	#Este devuelve desde la BD local
