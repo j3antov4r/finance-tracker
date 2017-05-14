@@ -1,5 +1,6 @@
 class UserStocksController < ApplicationController
-  before_action :set_user_stock, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_stock, only: [:show, :edit, :update]
+  before_action :set_user_stock_for_delete, only: [ :destroy]
 
   # GET /user_stocks
   # GET /user_stocks.json
@@ -71,9 +72,10 @@ class UserStocksController < ApplicationController
   # DELETE /user_stocks/1
   # DELETE /user_stocks/1.json
   def destroy
+
     @user_stock.destroy
     respond_to do |format|
-      format.html { redirect_to user_stocks_url, notice: 'User stock was successfully destroyed.' }
+      format.html { redirect_to my_portfolio_path, notice: 'Stock was successfully removed from portfolio.' }
       format.json { head :no_content }
     end
   end
@@ -87,5 +89,9 @@ class UserStocksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_stock_params
       params.require(:user_stock).permit(:user_id, :stock_id)
+    end
+
+    def set_user_stock_for_delete
+      @user_stock = UserStock.find_by(user_id: current_user.id, stock_id: params[:id])
     end
 end
